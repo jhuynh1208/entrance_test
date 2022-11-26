@@ -32,6 +32,8 @@
 		A5A5538029324BBE00453471 /* ModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5537629324BBE00453471 /* ModalPresenter.swift */; };
 		A5A5538129324BBE00453471 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5537829324BBE00453471 /* UIColor+Extension.swift */; };
 		A5A5538229324BBE00453471 /* UIColor+Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5537929324BBE00453471 /* UIColor+Asset.swift */; };
+		A5A5538529325BA100453471 /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5538429325BA100453471 /* UIImage+Assets.swift */; };
+		A5A5538B29325DF700453471 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5538A29325DF700453471 /* UIFont+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,10 @@
 		A5A5537629324BBE00453471 /* ModalPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresenter.swift; sourceTree = "<group>"; };
 		A5A5537829324BBE00453471 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		A5A5537929324BBE00453471 /* UIColor+Asset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Asset.swift"; sourceTree = "<group>"; };
+		A5A5538429325BA100453471 /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
+		A5A5538729325D8E00453471 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		A5A5538829325D8E00453471 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		A5A5538A29325DF700453471 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,7 @@
 		A549EB6C2932408400C54200 /* entrance_test */ = {
 			isa = PBXGroup;
 			children = (
+				A5A5538629325D8100453471 /* Resources */,
 				A549EB922932448000C54200 /* Extension */,
 				A549EB912932447100C54200 /* Modules */,
 				A549EB902932446800C54200 /* Coordinators */,
@@ -102,7 +109,6 @@
 				A549EB6F2932408400C54200 /* SceneDelegate.swift */,
 				A549EB712932408400C54200 /* ViewController.swift */,
 				A549EB732932408400C54200 /* Main.storyboard */,
-				A549EB762932408600C54200 /* Assets.xcassets */,
 				A549EB782932408600C54200 /* LaunchScreen.storyboard */,
 				A549EB7B2932408600C54200 /* Info.plist */,
 			);
@@ -140,6 +146,8 @@
 		A549EB922932448000C54200 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				A5A5538929325DE900453471 /* UIFont */,
+				A5A5538329325B9200453471 /* UIImage */,
 				A5A5537429324BBE00453471 /* Presenters */,
 				A5A5537729324BBE00453471 /* UIColor */,
 				A5A5537129324BBE00453471 /* UIView */,
@@ -210,6 +218,32 @@
 				A5A5537929324BBE00453471 /* UIColor+Asset.swift */,
 			);
 			path = UIColor;
+			sourceTree = "<group>";
+		};
+		A5A5538329325B9200453471 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				A5A5538429325BA100453471 /* UIImage+Assets.swift */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		A5A5538629325D8100453471 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A5A5538729325D8E00453471 /* Montserrat-Medium.ttf */,
+				A5A5538829325D8E00453471 /* Montserrat-Regular.ttf */,
+				A549EB762932408600C54200 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A5A5538929325DE900453471 /* UIFont */ = {
+			isa = PBXGroup;
+			children = (
+				A5A5538A29325DF700453471 /* UIFont+Extension.swift */,
+			);
+			path = UIFont;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +323,7 @@
 				A5A5537E29324BBE00453471 /* UIView+AutoLayout.swift in Sources */,
 				A549EBA3293244B900C54200 /* Coordinator.swift in Sources */,
 				A549EBA7293244B900C54200 /* RouterType.swift in Sources */,
+				A5A5538B29325DF700453471 /* UIFont+Extension.swift in Sources */,
 				A5A5537B29324BBE00453471 /* UIViewController+Extension.swift in Sources */,
 				A549EB722932408400C54200 /* ViewController.swift in Sources */,
 				A549EB962932449500C54200 /* AppDependency.swift in Sources */,
@@ -300,6 +335,7 @@
 				A549EBA6293244B900C54200 /* AppRouter.swift in Sources */,
 				A5A5537A29324BBE00453471 /* UIWindow+Extension.swift in Sources */,
 				A549EB702932408400C54200 /* SceneDelegate.swift in Sources */,
+				A5A5538529325BA100453471 /* UIImage+Assets.swift in Sources */,
 				A5A5537C29324BBE00453471 /* UIViewController+Container.swift in Sources */,
 				A549EBA8293244B900C54200 /* Presentable.swift in Sources */,
 				A549EBA5293244B900C54200 /* NavigationRouter.swift in Sources */,
