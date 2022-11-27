@@ -18,7 +18,7 @@ class BaseAPIManager<T: TargetType> {
 
 	/// Base URL built according to current environment
 	static var basePath: String {
-        return "http://streaming.nexlesoft.com:4000/"
+        return "http://streaming.nexlesoft.com:4000"
 	}
 
 	/// Moya provider object

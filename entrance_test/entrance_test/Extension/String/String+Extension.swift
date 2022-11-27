@@ -16,7 +16,7 @@ extension String {
     }
     
     func isPassword() -> Bool {
-        let regex = "^(?=.*[A-Z]|[a-z])(?=.*[!@#$&*])(?=.*[0-9]).{6,18}$"
+        let regex = "^(?=.*([a-z])|([A-Z]))(?=.*[!@#$&*])(?=.*[0-9]).{6,18}$"
         let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
         return predicate.evaluate(with: self)
     }

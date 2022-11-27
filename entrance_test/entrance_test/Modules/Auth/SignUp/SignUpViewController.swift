@@ -40,7 +40,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     @IBOutlet weak var lblPasswordError: UILabel!
     
     // MARK: - Properties
-    
+    var onSignUp: (() -> Void)?
     
     // MARK: - Life cycles
     override func viewDidLoad() {
@@ -202,7 +202,14 @@ extension SignUpViewController {
                 }
             }
         } else {
-            
+            viewModel.signup { [weak self] error in
+                if let error = error {
+                    self?.showAlert(title: "Sign Up Error", message: "\(error.localizedDescription)")
+                } else {
+                    print("====> Sign up success")
+                    self?.onSignUp?()
+                }
+            }
         }
     }
 }

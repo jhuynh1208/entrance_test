@@ -20,6 +20,8 @@ class SignUpViewModel: BaseViewModel {
     @Published var lastName: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
+    
+    private lazy var apiManager = AuthAPIManager(token: dependency.token)
 }
 
 // MARK: - Helper Methods
@@ -59,8 +61,24 @@ extension SignUpViewModel {
 
 // MARK: - APIs
 extension SignUpViewModel {
-    func signup() {
-        
+    func signup(completion: @escaping (APIError?) -> Void) {
+        let params = SignupRequestParam(firstName: firstName,
+                                        lastName: lastName,
+                                        email: email,
+                                        password: password)
+        apiManager.signup(params: params)
+            .sink(receiveCompletion: { incomplete in
+                switch incomplete {
+                case .finished: break
+                case .failure(let error):
+                    completion(error)
+                }
+            }, receiveValue: { [weak self] profile in
+                let session = Session(token: profile.token)
+                self?.dependency.token = session
+                completion(nil)
+            })
+            .store(in: &subscriptions)
     }
 }
 
