@@ -7,6 +7,7 @@ class SceneCoordinator: RootCoordinator {
 
 	override init(with router: AppRouter, dependency: AppDependency) {
 		super.init(with: router, dependency: dependency)
+        self.showSignUp()
 	}
 
 	override func start(with deeplink: DeepLink?) {
@@ -17,7 +18,18 @@ class SceneCoordinator: RootCoordinator {
 // MARK: - Routing
 
 extension SceneCoordinator {
-    
+    private func showSignUp() {
+        let viewModel = SignUpViewModel(dependency: dependency)
+        let coordinator = SignUpCoordinator(with: NavigationRouter(), viewModel: viewModel)
+        
+        childCoordinators.forEach { child in
+            removeChild(child)
+        }
+        
+        // Add new child
+        addChild(coordinator)
+        router.setRootModule(coordinator, transitionOptions: defaultTransitionOptions)
+    }
 }
 
 private let defaultTransitionOptions = UIWindow.TransitionOptions(direction: .fade, style: .easeIn)
