@@ -41,19 +41,20 @@ extension LoginViewModel {
 
 // MARK: - APIs
 extension LoginViewModel {
-    func login(completion: @escaping (APIError?) -> Void) {
+    func login(completion: @escaping (Result<UserProfile, APIError>) -> Void) {
         apiManager.login(params: LoginRequestParam(email: email,
                                                    password: password))
         .sink { incomplete in
             switch incomplete {
             case .finished: break
             case .failure(let error):
-                completion(error)
+                completion(.failure(error))
             }
         } receiveValue: { [weak self] profile in
             let session = Session(token: profile.token)
+            self?.dependency.profile = profile
             self?.dependency.tokenable = session
-            completion(nil)
+            completion(.success(profile))
         }
         .store(in: &subscriptions)
     }

@@ -9,6 +9,8 @@ import UIKit
 
 class LoginCoordinator: NavigationCoordinator {
 
+    var showDashboard: ((UserProfile) -> Void)?
+    
     init(with router: NavigationRouter, viewModel: LoginViewModel) {
         super.init(with: router, dependency: viewModel.dependency)
         
@@ -16,6 +18,10 @@ class LoginCoordinator: NavigationCoordinator {
         
         controller.onTapSignUp = { [weak self] in
             self?.showSignUp()
+        }
+        
+        controller.onLogin = { [weak self] profile in
+            self?.showDashboard?(profile)
         }
         
         router.setRootModule(controller, hideBar: true)
@@ -30,6 +36,10 @@ extension LoginCoordinator {
         
         coordinator.didBackToParent = { [weak self] in
             self?.removeChild(coordinator)
+        }
+        
+        coordinator.onSignUp = { [weak self] profile in
+            self?.showDashboard?(profile)
         }
         
         addChild(coordinator)

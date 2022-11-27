@@ -39,7 +39,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     @IBOutlet weak var lblPasswordError: UILabel!
     
     // MARK: - Properties
-    var onTapSignUp: (() -> Void)?
+    var onTapSignUp: ((UserProfile) -> Void)?
     var onTapSignIn: (() -> Void)?
     
     // MARK: - Life cycles
@@ -208,12 +208,12 @@ extension SignUpViewController {
                 }
             }
         } else {
-            viewModel.signup { [weak self] error in
-                if let error = error {
+            viewModel.signup { [weak self] result in
+                switch result {
+                case .success(let profile):
+                    self?.onTapSignUp?(profile)
+                case .failure(let error):
                     self?.showAlert(title: "Sign Up Error", message: "\(error.localizedDescription)")
-                } else {
-                    print("====> Sign up success")
-                    self?.onTapSignUp?()
                 }
             }
         }

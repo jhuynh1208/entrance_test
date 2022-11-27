@@ -57,6 +57,8 @@
 		A5EAE7F029337AFF0037042E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7EF29337AFF0037042E /* LoginViewModel.swift */; };
 		A5EAE7F229337B0C0037042E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7F129337B0C0037042E /* LoginCoordinator.swift */; };
 		A5EAE7F4293385B40037042E /* LoginRequestParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7F3293385B40037042E /* LoginRequestParam.swift */; };
+		A5EAE7F7293391990037042E /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7F6293391990037042E /* DashboardViewController.swift */; };
+		A5EAE7F9293391B30037042E /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7F8293391B30037042E /* DashboardViewModel.swift */; };
 		E96184609E845DF25CAD1CCD /* Pods_entrance_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED03B63D5868BC4224D0B60A /* Pods_entrance_test.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +116,8 @@
 		A5EAE7EF29337AFF0037042E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A5EAE7F129337B0C0037042E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		A5EAE7F3293385B40037042E /* LoginRequestParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestParam.swift; sourceTree = "<group>"; };
+		A5EAE7F6293391990037042E /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		A5EAE7F8293391B30037042E /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		C7E7892DCD485D8581DBE208 /* Pods-entrance_test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entrance_test.release.xcconfig"; path = "Target Support Files/Pods-entrance_test/Pods-entrance_test.release.xcconfig"; sourceTree = "<group>"; };
 		ED03B63D5868BC4224D0B60A /* Pods_entrance_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entrance_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -206,6 +210,7 @@
 		A549EB912932447100C54200 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A5EAE7F5293391820037042E /* Dashboard */,
 				A5BDB1B429326939003F484E /* Auth */,
 				A549EB97293244A300C54200 /* Bases */,
 			);
@@ -439,6 +444,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		A5EAE7F5293391820037042E /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				A5EAE7F6293391990037042E /* DashboardViewController.swift */,
+				A5EAE7F8293391B30037042E /* DashboardViewModel.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -557,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5EAE7EE29337AEF0037042E /* LoginViewController.swift in Sources */,
+				A5EAE7F7293391990037042E /* DashboardViewController.swift in Sources */,
 				A5EAE7EB293369370037042E /* UserProfile.swift in Sources */,
 				A5791F152933461E0031F0DB /* UITextField+Extension.swift in Sources */,
 				A5A5538129324BBE00453471 /* UIColor+Extension.swift in Sources */,
@@ -583,6 +598,7 @@
 				A549EB9B293244A400C54200 /* BaseViewModel.swift in Sources */,
 				A549EB6E2932408400C54200 /* AppDelegate.swift in Sources */,
 				A5EAE7F229337B0C0037042E /* LoginCoordinator.swift in Sources */,
+				A5EAE7F9293391B30037042E /* DashboardViewModel.swift in Sources */,
 				A549EBA6293244B900C54200 /* AppRouter.swift in Sources */,
 				A5A5537A29324BBE00453471 /* UIWindow+Extension.swift in Sources */,
 				A5EAE7DC2933641C0037042E /* URLRequest+Extension.swift in Sources */,

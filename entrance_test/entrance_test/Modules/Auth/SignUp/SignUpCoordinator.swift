@@ -10,6 +10,7 @@ import Foundation
 class SignUpCoordinator: NavigationCoordinator {
     
     var didBackToParent: (() -> Void)?
+    var onSignUp: ((UserProfile) -> Void)?
     
     init(with router: NavigationRouter, viewModel: SignUpViewModel) {
         super.init(with: router, dependency: viewModel.dependency)
@@ -21,6 +22,9 @@ class SignUpCoordinator: NavigationCoordinator {
             self?.didBackToParent?()
         }
         
+        controller.onTapSignUp = { [weak self] profile in
+            self?.onSignUp?(profile)
+        }
         
         router.push(controller)
     }

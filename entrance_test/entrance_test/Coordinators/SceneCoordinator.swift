@@ -2,19 +2,16 @@ import UIKit
 import Combine
 
 class SceneCoordinator: RootCoordinator {
-	private var deeplink: DeepLink?
 	private var isOnSplashScreen: Bool = true
 
 	override init(with router: AppRouter, dependency: AppDependency) {
 		super.init(with: router, dependency: dependency)
-        let token = dependency.tokenable
-        print("====> token \(token.token)")
-        showLogin()
-//        self.showSignUp()
-	}
-
-	override func start(with deeplink: DeepLink?) {
-		self.deeplink = deeplink
+        if let profile = dependency.profile {
+            showDashboard(profile: profile)
+        } else {
+            showLogin()
+        }
+        
 	}
 }
 
@@ -25,6 +22,10 @@ extension SceneCoordinator {
         let viewModel = LoginViewModel(dependency: dependency)
         let coordinator = LoginCoordinator(with: NavigationRouter(), viewModel: viewModel)
         
+        coordinator.showDashboard = { [weak self] profile in
+            self?.showDashboard(profile: profile)
+        }
+        
         childCoordinators.forEach { child in
             removeChild(child)
         }
@@ -32,6 +33,13 @@ extension SceneCoordinator {
         // Add new child
         addChild(coordinator)
         router.setRootModule(coordinator, transitionOptions: defaultTransitionOptions)
+    }
+    
+    private func showDashboard(profile: UserProfile) {
+        let viewModel = DashboardViewModel(dependency: dependency, userProfile: profile)
+        let controller = DashboardViewController.instance(viewModel: viewModel)
+        
+        router.setRootModule(controller, transitionOptions: defaultTransitionOptions)
     }
 }
 

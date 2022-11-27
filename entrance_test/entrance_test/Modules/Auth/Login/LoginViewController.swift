@@ -18,7 +18,7 @@ class LoginViewController: BaseViewController<LoginViewModel> {
     
     // MARK: - Properties
     var onTapSignUp: (() -> Void)?
-    var onLogin: (() -> Void)?
+    var onLogin: ((UserProfile) -> Void)?
     
     // MARK: - Outlets
     @IBOutlet weak var lblWelcome: UILabel!
@@ -182,12 +182,12 @@ extension LoginViewController {
                 }
             }
         } else {
-            viewModel.login { [weak self] error in
-                if let error = error {
+            viewModel.login { [weak self] result in
+                switch result {
+                case .failure(let error):
                     self?.showAlert(title: "Login Error", message: "\(error.localizedDescription)")
-                } else {
-                    print("====> Login success")
-                    self?.onLogin?()
+                case .success(let profile):
+                    self?.onLogin?(profile)
                 }
             }
         }

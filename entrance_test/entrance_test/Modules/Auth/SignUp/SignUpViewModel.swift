@@ -61,7 +61,7 @@ extension SignUpViewModel {
 
 // MARK: - APIs
 extension SignUpViewModel {
-    func signup(completion: @escaping (APIError?) -> Void) {
+    func signup(completion: @escaping (Result<UserProfile, APIError>) -> Void) {
         let params = SignupRequestParam(firstName: firstName,
                                         lastName: lastName,
                                         email: email,
@@ -71,12 +71,13 @@ extension SignUpViewModel {
                 switch incomplete {
                 case .finished: break
                 case .failure(let error):
-                    completion(error)
+                    completion(.failure(error))
                 }
             }, receiveValue: { [weak self] profile in
                 let session = Session(token: profile.token)
+                self?.dependency.profile = profile
                 self?.dependency.tokenable = session
-                completion(nil)
+                completion(.success(profile))
             })
             .store(in: &subscriptions)
     }
