@@ -17,4 +17,8 @@ class AuthAPIManager: BaseAPIManager<AuthTarget> {
     func login(params: LoginRequestParam) -> AnyPublisher<UserProfile, APIError> {
         return request(target: .login(params.asDictionary()), dataField: .none)
     }
+    
+    func logout() -> AnyPublisher<EmptyResponseModel, APIError> {
+        return request(target: .logout, dataField: .none)
+    }
 }

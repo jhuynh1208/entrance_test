@@ -9,7 +9,7 @@ class AppDependency {
             return Session(token: token)
         }
         set {
-            UserDefaults.standard.set(newValue.token, forKey: "token")
+            set(newValue.token, forKey: "token")
         }
     }
     

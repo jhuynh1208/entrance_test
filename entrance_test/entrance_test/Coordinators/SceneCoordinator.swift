@@ -39,6 +39,10 @@ extension SceneCoordinator {
         let viewModel = DashboardViewModel(dependency: dependency, userProfile: profile)
         let controller = DashboardViewController.instance(viewModel: viewModel)
         
+        controller.onLogout = { [weak self] in
+            self?.showLogin()
+        }
+        
         router.setRootModule(controller, transitionOptions: defaultTransitionOptions)
     }
 }

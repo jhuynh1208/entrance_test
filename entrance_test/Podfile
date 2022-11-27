@@ -7,5 +7,6 @@ target 'entrance_test' do
 
   # Pods for entrance_test
 pod 'Moya', '~> 15.0'
+pod 'SideMenu'
 
 end

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class DashboardViewController: BaseViewController<DashboardViewModel> {
 
@@ -24,9 +25,23 @@ class DashboardViewController: BaseViewController<DashboardViewModel> {
     @IBOutlet weak var lblWelcome: UILabel!
     @IBOutlet weak var lblCopyright: UILabel!
     
+    var onLogout: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
+    }
+    
+    @IBAction func didTapBtnMenu(_ sender: Any) {
+        let sideMenuVC = SideMenuViewController.instance(viewModel: SideMenuViewModel(dependency: viewModel.dependency))
+        
+        sideMenuVC.onLogout = { [weak self] in
+            self?.handleLogout()
+        }
+        
+        let leftMenuNavigationController = SideMenuNavigationController(rootViewController: sideMenuVC)
+        leftMenuNavigationController.leftSide = true
+        present(leftMenuNavigationController, animated: true)
     }
 }
 
@@ -39,5 +54,15 @@ extension DashboardViewController {
         lblAvailable.text = "Available"
         lblWelcome.textColor = .AppColor.lightDark
         lblCopyright.textColor = .AppColor.textGray
+    }
+    
+    private func handleLogout() {
+        self.viewModel.logout { [weak self] error in
+            if let error = error {
+                self?.showAlert(title: "Logout Error", message: "\(error.localizedDescription)")
+            } else {
+                self?.onLogout?()
+            }
+        }
     }
 }

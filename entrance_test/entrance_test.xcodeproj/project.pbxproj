@@ -59,6 +59,8 @@
 		A5EAE7F4293385B40037042E /* LoginRequestParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7F3293385B40037042E /* LoginRequestParam.swift */; };
 		A5EAE7F7293391990037042E /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7F6293391990037042E /* DashboardViewController.swift */; };
 		A5EAE7F9293391B30037042E /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7F8293391B30037042E /* DashboardViewModel.swift */; };
+		A5EAE7FC2933A8710037042E /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7FB2933A8710037042E /* SideMenuViewModel.swift */; };
+		A5EAE7FE2933A8810037042E /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EAE7FD2933A8810037042E /* SideMenuViewController.swift */; };
 		E96184609E845DF25CAD1CCD /* Pods_entrance_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED03B63D5868BC4224D0B60A /* Pods_entrance_test.framework */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +120,8 @@
 		A5EAE7F3293385B40037042E /* LoginRequestParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestParam.swift; sourceTree = "<group>"; };
 		A5EAE7F6293391990037042E /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		A5EAE7F8293391B30037042E /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		A5EAE7FB2933A8710037042E /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
+		A5EAE7FD2933A8810037042E /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		C7E7892DCD485D8581DBE208 /* Pods-entrance_test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entrance_test.release.xcconfig"; path = "Target Support Files/Pods-entrance_test/Pods-entrance_test.release.xcconfig"; sourceTree = "<group>"; };
 		ED03B63D5868BC4224D0B60A /* Pods_entrance_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entrance_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -210,6 +214,7 @@
 		A549EB912932447100C54200 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A5EAE7FA2933A8560037042E /* SideMenu */,
 				A5EAE7F5293391820037042E /* Dashboard */,
 				A5BDB1B429326939003F484E /* Auth */,
 				A549EB97293244A300C54200 /* Bases */,
@@ -453,6 +458,15 @@
 			path = Dashboard;
 			sourceTree = "<group>";
 		};
+		A5EAE7FA2933A8560037042E /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A5EAE7FB2933A8710037042E /* SideMenuViewModel.swift */,
+				A5EAE7FD2933A8810037042E /* SideMenuViewController.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -609,7 +623,9 @@
 				A5A5538529325BA100453471 /* UIImage+Assets.swift in Sources */,
 				A5A7FF552933531300528B0F /* APIError.swift in Sources */,
 				A5A5537C29324BBE00453471 /* UIViewController+Container.swift in Sources */,
+				A5EAE7FE2933A8810037042E /* SideMenuViewController.swift in Sources */,
 				A549EBA8293244B900C54200 /* Presentable.swift in Sources */,
+				A5EAE7FC2933A8710037042E /* SideMenuViewModel.swift in Sources */,
 				A549EBA5293244B900C54200 /* NavigationRouter.swift in Sources */,
 				A5EAE7F4293385B40037042E /* LoginRequestParam.swift in Sources */,
 				A5BDB1B729326C31003F484E /* SignUpViewModel.swift in Sources */,
