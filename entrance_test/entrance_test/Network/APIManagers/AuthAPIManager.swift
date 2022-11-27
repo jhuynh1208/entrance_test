@@ -11,6 +11,10 @@ import Combine
 class AuthAPIManager: BaseAPIManager<AuthTarget> {
     
     func signup(params: SignupRequestParam) -> AnyPublisher<UserProfile, APIError> {
-        return request(target: .signup(params), dataField: .none)
+        return request(target: .signup(params.asDictionary()), dataField: .none)
+    }
+    
+    func login(params: LoginRequestParam) -> AnyPublisher<UserProfile, APIError> {
+        return request(target: .login(params.asDictionary()), dataField: .none)
     }
 }

@@ -21,7 +21,7 @@ class SignUpViewModel: BaseViewModel {
     @Published var email: String = ""
     @Published var password: String = ""
     
-    private lazy var apiManager = AuthAPIManager(token: dependency.token)
+    private lazy var apiManager = AuthAPIManager(token: dependency.tokenable)
 }
 
 // MARK: - Helper Methods
@@ -75,7 +75,7 @@ extension SignUpViewModel {
                 }
             }, receiveValue: { [weak self] profile in
                 let session = Session(token: profile.token)
-                self?.dependency.token = session
+                self?.dependency.tokenable = session
                 completion(nil)
             })
             .store(in: &subscriptions)

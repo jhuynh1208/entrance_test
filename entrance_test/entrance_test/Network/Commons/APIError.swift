@@ -18,18 +18,19 @@ struct DecodingError: LocalizedError {
 
 /// Backend error
 struct BackendError: Decodable, LocalizedError {
-    let message: String
-    let errors: [String: [String]]?
-    var statusCode: Int?
+    var errors: Errors
+    var statusCode: Int
+    var success: Bool
 
     var errorDescription: String? {
-        return errors?.first?.value.first ?? message
+        return errors.message.first
     }
+}
 
-    enum CodingKeys: String, CodingKey {
-        case message = "detail"
-        case errors = "data"
-    }
+struct Errors: Decodable {
+    var message: [String]
+    var error: String
+    var stack: String
 }
 
 /// Possible error types that can be returned by APIManager

@@ -1,36 +1,35 @@
 //
-//  SignUpViewController.swift
+//  LoginViewController.swift
 //  entrance_test
 //
-//  Created by Thiện on 26/11/2022.
+//  Created by Thiện on 27/11/2022.
 //
 
 import UIKit
 
-class SignUpViewController: BaseViewController<SignUpViewModel> {
+class LoginViewController: BaseViewController<LoginViewModel> {
+
     // MARK: - Init
-    class func instance(viewModel: SignUpViewModel) -> SignUpViewController {
-        let controller = instance(storyboardName: "Main") as! SignUpViewController
+    class func instance(viewModel: LoginViewModel) -> LoginViewController {
+        let controller = instance(storyboardName: "Main") as! LoginViewController
         controller.viewModel = viewModel
         return controller
     }
     
+    // MARK: - Properties
+    var onTapSignUp: (() -> Void)?
+    var onLogin: (() -> Void)?
+    
     // MARK: - Outlets
-    @IBOutlet weak var lblAdventure: UILabel!
+    @IBOutlet weak var lblWelcome: UILabel!
     @IBOutlet weak var lblSubtitle: UILabel!
     @IBOutlet weak var btnCheck: UIButton!
-    @IBOutlet weak var lblAgree: UILabel!
-    @IBOutlet weak var lblPolicyTerm: UILabel!
-    @IBOutlet weak var btnSignUp: UIButton!
-    @IBOutlet weak var lblHaveAccount: UILabel!
-    @IBOutlet weak var lblSignin: UILabel!
+    @IBOutlet weak var lblRemember: UILabel!
+    @IBOutlet weak var btnLogin: UIButton!
+    @IBOutlet weak var lblRegisterAccount: UILabel!
+    @IBOutlet weak var lblForgotPass: UILabel!
+    @IBOutlet weak var lblSignup: UILabel!
     @IBOutlet weak var lblOr: UILabel!
-    @IBOutlet weak var lblFirstName: UILabel!
-    @IBOutlet weak var textFieldFirstName: UITextField!
-    @IBOutlet weak var lblFirstNameError: UILabel!
-    @IBOutlet weak var lblLastName: UILabel!
-    @IBOutlet weak var textFieldLastName: UITextField!
-    @IBOutlet weak var lblLastNameError: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var lblEmailError: UILabel!
@@ -38,11 +37,6 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var lblPasswordError: UILabel!
     
-    // MARK: - Properties
-    var onTapSignUp: (() -> Void)?
-    var onTapSignIn: (() -> Void)?
-    
-    // MARK: - Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
@@ -52,11 +46,11 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     // MARK: - Actions
     @IBAction func didTapBtnCheck(_ sender: Any) {
         self.view.endEditing(true)
-        viewModel.isAgreePolicyTerm = !viewModel.isAgreePolicyTerm
+        viewModel.isRemember = !viewModel.isRemember
     }
     
-    @IBAction func didTapBtnSignUp(_ sender: Any) {
-        self.handleSignUp()
+    @IBAction func didTapBtnLogin(_ sender: Any) {
+        self.handleLogin()
     }
     
     @IBAction func didTapBtnSocial(_ sender: UIButton) {
@@ -64,52 +58,52 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         self.showAlert(title: "Social login", message: "This function is applying. Please check it again later!!!!")
     }
     
-    @objc private func didTapLblPolicyTerm() {
+    @objc private func didTapLblForgotPass() {
         self.view.endEditing(true)
-        self.showAlert(title: "Privacy policy & Term", message: "This function is applying. Please check it again later!!!!")
+        self.showAlert(title: "Forgot Password", message: "This function is applying. Please check it again later!!!!")
     }
     
-    @objc private func didTapLblSignIn() {
+    @objc private func didTapLblSignUp() {
         self.view.endEditing(true)
-        self.onTapSignIn?()
+        onTapSignUp?()
     }
 }
 
 // MARK: - Helper methods
-extension SignUpViewController {
+extension LoginViewController {
     private func initUI() {
-        lblAdventure.font = UIFont.montserratMedium(size: 18)
-        lblAdventure.textColor = UIColor.AppColor.lightDark
+        lblWelcome.font = UIFont.montserratMedium(size: 18)
+        lblWelcome.textColor = UIColor.AppColor.lightDark
         
         lblSubtitle.font = UIFont.montserratRegular(size: 14)
         lblSubtitle.textColor = UIColor.AppColor.textGray
         
-        lblAgree.font = UIFont.montserratRegular(size: 14)
-        lblAgree.textColor = UIColor.AppColor.textGray
+        lblRemember.font = UIFont.montserratRegular(size: 14)
+        lblRemember.textColor = UIColor.AppColor.textGray
         
-        lblPolicyTerm.font = UIFont.montserratRegular(size: 14)
-        lblPolicyTerm.textColor = UIColor.AppColor.lightPurple
-        lblPolicyTerm.isUserInteractionEnabled = true
-        lblPolicyTerm.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapLblPolicyTerm)))
+        lblRegisterAccount.font = UIFont.montserratRegular(size: 14)
+        lblRegisterAccount.textColor = UIColor.AppColor.textGray
         
-        lblHaveAccount.font = UIFont.montserratRegular(size: 14)
-        lblHaveAccount.textColor = UIColor.AppColor.textGray
-        
-        lblSignin.font = UIFont.montserratRegular(size: 14)
-        lblSignin.textColor = UIColor.AppColor.lightPurple
-        lblSignin.isUserInteractionEnabled = true
-        lblSignin.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapLblSignIn)))
+        lblSignup.font = UIFont.montserratRegular(size: 14)
+        lblSignup.textColor = UIColor.AppColor.lightPurple
+        lblSignup.isUserInteractionEnabled = true
+        lblSignup.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapLblSignUp)))
         
         lblOr.font = UIFont.montserratRegular(size: 14)
         lblOr.textColor = UIColor.AppColor.textGray
         
-        btnSignUp.layer.cornerRadius = 5
-        let btnAttributedText = NSAttributedString(string: "Sign Up",
+        lblForgotPass.textColor = .AppColor.lightPurple
+        lblForgotPass.font = .montserratRegular(size: 12)
+        lblForgotPass.isUserInteractionEnabled = true
+        lblForgotPass.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapLblForgotPass)))
+        
+        btnLogin.layer.cornerRadius = 5
+        let btnAttributedText = NSAttributedString(string: "Login",
                                                    attributes: [
                                                     .font: UIFont.montserratMedium(size: 14),
                                                     .foregroundColor: UIColor.white
                                                    ])
-        btnSignUp.setAttributedTitle(btnAttributedText, for: .normal)
+        btnLogin.setAttributedTitle(btnAttributedText, for: .normal)
         
         btnCheck.layer.borderColor = UIColor(hex: 0xD8D6DE).cgColor
         btnCheck.layer.borderWidth = 1
@@ -119,10 +113,10 @@ extension SignUpViewController {
     }
     
     private func bindToViewModel() {
-        viewModel.$isAgreePolicyTerm
-            .sink { [weak self] isAgree in
+        viewModel.$isRemember
+            .sink { [weak self] isRemember in
                 guard let `self` = self else { return }
-                if isAgree {
+                if isRemember {
                     self.btnCheck.layer.borderWidth = 0
                     self.btnCheck.backgroundColor = .AppColor.lightPurple
                 } else {
@@ -131,13 +125,7 @@ extension SignUpViewController {
                 }
             }
             .store(in: &viewModel.subscriptions)
-        
-        self.textFieldFirstName.textChangedPublisher()
-            .assign(to: \.firstName, on: viewModel)
-            .store(in: &viewModel.subscriptions)
-        self.textFieldLastName.textChangedPublisher()
-            .assign(to: \.lastName, on: viewModel)
-            .store(in: &viewModel.subscriptions)
+//
         self.textFieldEmail.textChangedPublisher()
             .assign(to: \.email, on: viewModel)
             .store(in: &viewModel.subscriptions)
@@ -147,28 +135,18 @@ extension SignUpViewController {
     }
     
     private func initInputField() {
-        lblFirstNameError.isHidden = true
         lblEmailError.isHidden = true
-        lblLastNameError.isHidden = true
         lblPasswordError.isHidden = true
         
-        self.setAttributedRequired(for: lblFirstName, with: "First Name")
-        self.setAttributedRequired(for: lblLastName, with: "Last Name")
         self.setAttributedRequired(for: lblEmail, with: "Email")
         self.setAttributedRequired(for: lblPassword, with: "Password")
         
-        lblFirstNameError.font = .montserratRegular(size: 12)
-        lblFirstNameError.textColor = .AppColor.error
-        lblLastNameError.font = .montserratRegular(size: 12)
-        lblLastNameError.textColor = .AppColor.error
         lblEmailError.font = .montserratRegular(size: 12)
         lblEmailError.textColor = .AppColor.error
         lblPasswordError.font = .montserratRegular(size: 12)
         lblPasswordError.textColor = .AppColor.error
         
         textFieldEmail.delegate = self
-        textFieldFirstName.delegate = self
-        textFieldLastName.delegate = self
         textFieldPassword.delegate = self
     }
     
@@ -188,32 +166,28 @@ extension SignUpViewController {
         label.attributedText = attributedTitle
     }
     
-    private func handleSignUp() {
+    private func handleLogin() {
         let errors = viewModel.validate()
         if !errors.isEmpty {
             for error in errors {
                 switch error.type {
-                case .firstName:
-                    lblFirstNameError.text = error.message
-                    lblFirstNameError.isHidden = false
-                case .lastName:
-                    lblLastNameError.text = error.message
-                    lblLastNameError.isHidden = false
                 case .email:
                     lblEmailError.text = error.message
                     lblEmailError.isHidden = false
                 case .password:
                     lblPasswordError.text = error.message
                     lblPasswordError.isHidden = false
+                default:
+                    break
                 }
             }
         } else {
-            viewModel.signup { [weak self] error in
+            viewModel.login { [weak self] error in
                 if let error = error {
-                    self?.showAlert(title: "Sign Up Error", message: "\(error.localizedDescription)")
+                    self?.showAlert(title: "Login Error", message: "\(error.localizedDescription)")
                 } else {
-                    print("====> Sign up success")
-                    self?.onTapSignUp?()
+                    print("====> Login success")
+                    self?.onLogin?()
                 }
             }
         }
@@ -221,15 +195,11 @@ extension SignUpViewController {
 }
 
 // MARK: - UITextFieldDelegate
-extension SignUpViewController: UITextFieldDelegate {
+extension LoginViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
-        case let x where x == self.textFieldFirstName:
-            lblFirstNameError.isHidden = true
         case let x where x == self.textFieldEmail:
             lblEmailError.isHidden = true
-        case let x where x == self.textFieldLastName:
-            lblLastNameError.isHidden = true
         case let x where x == self.textFieldPassword:
             lblPasswordError.isHidden = true
         default:
@@ -239,18 +209,12 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case let x where x == self.textFieldFirstName:
-            textFieldLastName.becomeFirstResponder()
-            return true
-        case let x where x == self.textFieldLastName:
-            textFieldEmail.becomeFirstResponder()
-            return true
         case let x where x == self.textFieldEmail:
             textFieldPassword.becomeFirstResponder()
             return true
         case let x where x == self.textFieldPassword:
             self.view.endEditing(true)
-            self.handleSignUp()
+            self.handleLogin()
             return true
         default:
             return true

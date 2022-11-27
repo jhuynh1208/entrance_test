@@ -20,7 +20,7 @@ public extension Decodable {
 }
 
 public extension Encodable {
-    func toJson() -> [String: Any] {
+    func asDictionary() -> [String: Any] {
         guard let data = try? JSONEncoder().encode(self) else {
             return [:]
         }
@@ -31,13 +31,5 @@ public extension Encodable {
         }
 
         return dictionary.filter({ !($0.value is NSNull) })
-    }
-    
-    func toJsonString() -> String {
-        guard let data = try? JSONEncoder().encode(self) else {
-            return ""
-        }
-
-        return String(data: data, encoding: .utf8) ?? ""
     }
 }

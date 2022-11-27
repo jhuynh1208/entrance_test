@@ -8,8 +8,8 @@
 import Moya
 
 enum AuthTarget {
-    case login
-    case signup(SignupRequestParam)
+    case login(ParametersDictionary)
+    case signup(ParametersDictionary)
     case logout
 }
 
@@ -38,10 +38,10 @@ extension AuthTarget: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .signup(let params):
-            return .requestParameters(parameters: params.toJson(),
+        case .signup(let params), .login(let params):
+            return .requestParameters(parameters: params,
                                       encoding: JSONEncoding.default)
-        case .logout, .login:
+        case .logout:
             return .requestPlain
         }
     }
