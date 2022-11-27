@@ -56,7 +56,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     }
     
     @IBAction func didTapBtnSignUp(_ sender: Any) {
-        
+        self.handleSignUp()
     }
     
     @IBAction func didTapBtnSocial(_ sender: UIButton) {
@@ -181,6 +181,30 @@ extension SignUpViewController {
         attributedTitle.append(attributedRequiredDot)
         label.attributedText = attributedTitle
     }
+    
+    private func handleSignUp() {
+        let errors = viewModel.validate()
+        if !errors.isEmpty {
+            for error in errors {
+                switch error.type {
+                case .firstName:
+                    lblFirstNameError.text = error.message
+                    lblFirstNameError.isHidden = false
+                case .lastName:
+                    lblLastNameError.text = error.message
+                    lblLastNameError.isHidden = false
+                case .email:
+                    lblEmailError.text = error.message
+                    lblEmailError.isHidden = false
+                case .password:
+                    lblPasswordError.text = error.message
+                    lblPasswordError.isHidden = false
+                }
+            }
+        } else {
+            
+        }
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -213,6 +237,7 @@ extension SignUpViewController: UITextFieldDelegate {
             return true
         case let x where x == self.textFieldPassword:
             self.view.endEditing(true)
+            self.handleSignUp()
             return true
         default:
             return true
