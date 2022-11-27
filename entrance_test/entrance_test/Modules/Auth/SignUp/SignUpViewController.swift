@@ -26,6 +26,18 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     @IBOutlet weak var lblHaveAccount: UILabel!
     @IBOutlet weak var lblSignin: UILabel!
     @IBOutlet weak var lblOr: UILabel!
+    @IBOutlet weak var lblFirstName: UILabel!
+    @IBOutlet weak var textFieldFirstName: UITextField!
+    @IBOutlet weak var lblFirstNameError: UILabel!
+    @IBOutlet weak var lblLastName: UILabel!
+    @IBOutlet weak var textFieldLastName: UITextField!
+    @IBOutlet weak var lblLastNameError: UILabel!
+    @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var textFieldEmail: UITextField!
+    @IBOutlet weak var lblEmailError: UILabel!
+    @IBOutlet weak var lblPassword: UILabel!
+    @IBOutlet weak var textFieldPassword: UITextField!
+    @IBOutlet weak var lblPasswordError: UILabel!
     
     // MARK: - Properties
     
@@ -39,6 +51,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
 
     // MARK: - Actions
     @IBAction func didTapBtnCheck(_ sender: Any) {
+        self.view.endEditing(true)
         viewModel.isAgreePolicyTerm = !viewModel.isAgreePolicyTerm
     }
     
@@ -47,19 +60,21 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     }
     
     @IBAction func didTapBtnSocial(_ sender: UIButton) {
+        self.view.endEditing(true)
         let alertVC = UIAlertController(title: "Social login", message: "This function is applying. Please check it again later!!!!", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alertVC, animated: true)
     }
     
     @objc private func didTapLblPolicyTerm() {
+        self.view.endEditing(true)
         let alertVC = UIAlertController(title: "Privacy policy & Term", message: "This function is applying. Please check it again later!!!!", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alertVC, animated: true)
     }
     
     @objc private func didTapLblSignIn() {
-        
+        self.view.endEditing(true)
     }
 }
 
@@ -97,11 +112,13 @@ extension SignUpViewController {
                                                     .font: UIFont.montserratMedium(size: 14),
                                                     .foregroundColor: UIColor.white
                                                    ])
-        btnSignUp.titleLabel?.attributedText = btnAttributedText
+        btnSignUp.setAttributedTitle(btnAttributedText, for: .normal)
         
         btnCheck.layer.borderColor = UIColor(hex: 0xD8D6DE).cgColor
         btnCheck.layer.borderWidth = 1
         btnCheck.layer.cornerRadius = 3
+        
+        initInputField()
     }
     
     private func bindToViewModel() {
@@ -117,5 +134,88 @@ extension SignUpViewController {
                 }
             }
             .store(in: &viewModel.subscriptions)
+        
+        self.textFieldFirstName.textChangedPublisher()
+            .assign(to: \.firstName, on: viewModel)
+            .store(in: &viewModel.subscriptions)
+        self.textFieldLastName.textChangedPublisher()
+            .assign(to: \.lastName, on: viewModel)
+            .store(in: &viewModel.subscriptions)
+        self.textFieldEmail.textChangedPublisher()
+            .assign(to: \.email, on: viewModel)
+            .store(in: &viewModel.subscriptions)
+        self.textFieldPassword.textChangedPublisher()
+            .assign(to: \.password, on: viewModel)
+            .store(in: &viewModel.subscriptions)
+    }
+    
+    private func initInputField() {
+        lblFirstNameError.isHidden = true
+        lblEmailError.isHidden = true
+        lblLastNameError.isHidden = true
+        lblPasswordError.isHidden = true
+        
+        self.setAttributedRequired(for: lblFirstName, with: "First Name")
+        self.setAttributedRequired(for: lblLastName, with: "Last Name")
+        self.setAttributedRequired(for: lblEmail, with: "Email")
+        self.setAttributedRequired(for: lblPassword, with: "Password")
+        
+        textFieldEmail.delegate = self
+        textFieldFirstName.delegate = self
+        textFieldLastName.delegate = self
+        textFieldPassword.delegate = self
+    }
+    
+    private func setAttributedRequired(for label: UILabel, with title: String) {
+        let attributedRequiredDot = NSAttributedString(string: "*",
+                                                       attributes: [
+                                                        .foregroundColor: UIColor.AppColor.error,
+                                                        .font: UIFont.montserratRegular(size: 12)
+                                                       ])
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.AppColor.textGray,
+            .font: UIFont.montserratRegular(size: 12)
+        ]
+        let attributedTitle = NSMutableAttributedString(string: title,
+                                                        attributes: attributes)
+        attributedTitle.append(attributedRequiredDot)
+        label.attributedText = attributedTitle
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case let x where x == self.textFieldFirstName:
+            lblFirstNameError.isHidden = true
+        case let x where x == self.textFieldEmail:
+            lblEmailError.isHidden = true
+        case let x where x == self.textFieldLastName:
+            lblLastNameError.isHidden = true
+        case let x where x == self.textFieldPassword:
+            lblPasswordError.isHidden = true
+        default:
+            break
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case let x where x == self.textFieldFirstName:
+            textFieldLastName.becomeFirstResponder()
+            return true
+        case let x where x == self.textFieldLastName:
+            textFieldEmail.becomeFirstResponder()
+            return true
+        case let x where x == self.textFieldEmail:
+            textFieldPassword.becomeFirstResponder()
+            return true
+        case let x where x == self.textFieldPassword:
+            self.view.endEditing(true)
+            return true
+        default:
+            return true
+        }
     }
 }

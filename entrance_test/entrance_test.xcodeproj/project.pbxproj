@@ -23,6 +23,7 @@
 		A549EBA6293244B900C54200 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549EBA0293244B800C54200 /* AppRouter.swift */; };
 		A549EBA7293244B900C54200 /* RouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549EBA1293244B800C54200 /* RouterType.swift */; };
 		A549EBA8293244B900C54200 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549EBA2293244B800C54200 /* Presentable.swift */; };
+		A5791F152933461E0031F0DB /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5791F142933461E0031F0DB /* UITextField+Extension.swift */; };
 		A5A5537A29324BBE00453471 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5536D29324BBD00453471 /* UIWindow+Extension.swift */; };
 		A5A5537B29324BBE00453471 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5536F29324BBD00453471 /* UIViewController+Extension.swift */; };
 		A5A5537C29324BBE00453471 /* UIViewController+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5537029324BBD00453471 /* UIViewController+Container.swift */; };
@@ -59,6 +60,7 @@
 		A549EBA0293244B800C54200 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		A549EBA1293244B800C54200 /* RouterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterType.swift; sourceTree = "<group>"; };
 		A549EBA2293244B800C54200 /* Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
+		A5791F142933461E0031F0DB /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		A5A5536D29324BBD00453471 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		A5A5536F29324BBD00453471 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A5A5537029324BBD00453471 /* UIViewController+Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Container.swift"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		A549EB922932448000C54200 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				A5791F13293346090031F0DB /* UITextField */,
 				A5A5538929325DE900453471 /* UIFont */,
 				A5A5538329325B9200453471 /* UIImage */,
 				A5A5537429324BBE00453471 /* Presenters */,
@@ -180,6 +183,14 @@
 				A549EBA1293244B800C54200 /* RouterType.swift */,
 			);
 			path = Routers;
+			sourceTree = "<group>";
+		};
+		A5791F13293346090031F0DB /* UITextField */ = {
+			isa = PBXGroup;
+			children = (
+				A5791F142933461E0031F0DB /* UITextField+Extension.swift */,
+			);
+			path = UITextField;
 			sourceTree = "<group>";
 		};
 		A5A5536C29324BBD00453471 /* UIWindow */ = {
@@ -343,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5791F152933461E0031F0DB /* UITextField+Extension.swift in Sources */,
 				A5A5538129324BBE00453471 /* UIColor+Extension.swift in Sources */,
 				A549EBA4293244B900C54200 /* SceneCoordinator.swift in Sources */,
 				A5A5538229324BBE00453471 /* UIColor+Asset.swift in Sources */,
