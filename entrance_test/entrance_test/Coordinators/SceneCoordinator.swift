@@ -7,7 +7,10 @@ class SceneCoordinator: RootCoordinator {
 
 	override init(with router: AppRouter, dependency: AppDependency) {
 		super.init(with: router, dependency: dependency)
-        self.showSignUp()
+        let token = dependency.tokenable
+        print("====> token \(token.token)")
+        showLogin()
+//        self.showSignUp()
 	}
 
 	override func start(with deeplink: DeepLink?) {
@@ -18,9 +21,9 @@ class SceneCoordinator: RootCoordinator {
 // MARK: - Routing
 
 extension SceneCoordinator {
-    private func showSignUp() {
-        let viewModel = SignUpViewModel(dependency: dependency)
-        let coordinator = SignUpCoordinator(with: NavigationRouter(), viewModel: viewModel)
+    private func showLogin() {
+        let viewModel = LoginViewModel(dependency: dependency)
+        let coordinator = LoginCoordinator(with: NavigationRouter(), viewModel: viewModel)
         
         childCoordinators.forEach { child in
             removeChild(child)

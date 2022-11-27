@@ -3,10 +3,19 @@ import Combine
 
 // Class to store all dependency of the app (that shared using all places in the app)
 class AppDependency {
-    var token: Tokenable    // To store token
+    var tokenable: Tokenable {
+        get {
+            let token = UserDefaults.standard.string(forKey: "token") ?? ""
+            return Session(token: token)
+        }
+        set {
+            UserDefaults.standard.set(newValue.token, forKey: "token")
+        }
+    }
+    
     
     init() {
-        self.token = Session(token: "")
+        self.tokenable = Session(token: "")
     }
 }
 

@@ -9,11 +9,19 @@ import Foundation
 
 class SignUpCoordinator: NavigationCoordinator {
     
+    var didBackToParent: (() -> Void)?
+    
     init(with router: NavigationRouter, viewModel: SignUpViewModel) {
         super.init(with: router, dependency: viewModel.dependency)
         
         let controller = SignUpViewController.instance(viewModel: viewModel)
         
-        router.setRootModule(controller, hideBar: true)
+        controller.onTapSignIn = { [weak self] in
+            self?.router.popModule()
+            self?.didBackToParent?()
+        }
+        
+        
+        router.push(controller)
     }
 }
